@@ -15,7 +15,7 @@ app.intent('actions.intent.greeting', conv => {
   conv.ask('A wondrous greeting, adventurer! Welcome back to the mythical land of Gryffinberg!');
 })
 
-app.handle('unavailable_options', conv => {
+app.intent('unavailable_options', conv => {
   conv.ask('That wont help');
 });
 
