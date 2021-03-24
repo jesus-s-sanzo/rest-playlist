@@ -40,7 +40,13 @@ const expressApp = express().use(bodyParser.json());
 
 expressApp.post('/fulfillment', app);
 
+expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
+
 const port = process.env.PORT ? process.env.PORT : 3000;
+
+module.exports = {
+  'expressApp': expressApp
+}
 
 // start the server on the given port
 expressApp.listen(port, () => console.log(`server listening on port ${port}`));

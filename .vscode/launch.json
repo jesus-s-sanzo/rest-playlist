@@ -1,0 +1,52 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "args": [
+                "-u",
+                "bdd",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "name": "Mocha Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Mocha Tests",
+        //     "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+        //     "args": [
+        //         "--reporter",
+        //         "dot",
+        //         "--slow",
+        //         "5000",
+        //         "--colors",
+        //         "${workspaceFolder}/tests/test.js",
+        //         "--timeout",
+        //         "10000"
+        //     ],
+        //     "internalConsoleOptions": "openOnSessionStart",
+        //     "skipFiles": [
+        //         "<node_internals>/**"
+        //     ]
+        // },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\index.js"
+        }
+    ]
+}
