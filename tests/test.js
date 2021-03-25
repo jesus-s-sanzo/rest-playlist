@@ -2,7 +2,7 @@
 
 const supertest = require('supertest');
 
-const expressApp = require('../index.js').expressApp;
+const expressApp = require('../server.js').expressApp;
 
 const assert = require('unit.js/src/assert');
 
