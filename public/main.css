@@ -1,0 +1,20 @@
+/* this style file is referenced in the index.html file and will be sent to the client */
+
+body {
+    background-color: #d3a092;
+}
+
+.title {
+    color: rgb(251, 255, 0);
+}
+
+.main-text {
+    color: #5588ee;
+    font-style: italic;
+}
+
+.small-text {
+    color: darkred;
+    font-style: italic;
+    font-size: 0.5rem;
+}

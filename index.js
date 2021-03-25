@@ -37,11 +37,14 @@ app.fallback((conv) => {
 });
 
 const expressApp = express().use(bodyParser.json());
+expressApp.use(express.static("public"));
+// serve the index.html file when visiting the homepage
+expressApp.get("/", function (request, response) {
+  response.sendFile(__dirname + "/index.html");
+});
 
 expressApp.post('/fulfillment', app);
-
 expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
-
 const port = process.env.PORT ? process.env.PORT : 3000;
 
 module.exports = {
