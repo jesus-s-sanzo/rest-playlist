@@ -1,6 +1,6 @@
 /* this javascript file is referenced in the index.html and will be sent to the client. This code is not executed server-side */
 
-const endpoint = './fulfilment';
+const endpoint = './fulfillment';
 
 const getHealth = async () => {
     const response = await fetch('./health');

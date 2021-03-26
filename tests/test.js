@@ -60,7 +60,7 @@ const sampleBody = {
 };
 
 function test1(done) {
-    request.post('/fulfilment').send(sampleBody).expect(200).end(function (err, result) {
+    request.post('/fulfillment').send(sampleBody).expect(200).end(function (err, result) {
         let body = result.body;
         done(err);
     });

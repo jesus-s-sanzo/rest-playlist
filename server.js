@@ -13,10 +13,13 @@ app.intent('actions.intent.MAIN', conv => { conv.ask('Hi, how is it going MAIN c
 app.intent('actions.intent.TEXT', (conv, input) => {
   if (input === 'bye' || input === 'goodbye') { return conv.close('See you later!') }
   conv.ask(`I didn't understand. Can you tell me something else?`)
-})
+});
 
 app.intent('actions.intent.greeting', conv => { conv.ask('A wondrous greeting, adventurer! Welcome back to the mythical land of Gryffinberg!'); })
 app.intent('unavailable_options', conv => { conv.ask('That wont help'); });
+
+app.intent('Welcome', (conv) => { console.log('welcome'); conv.ask('Welcome!'); });
+app.intent('greeting', (conv) => { console.log('greetng called'); conv.ask('geeting!'); });
 
 
 app.fallback((conv) => { conv.ask(`I couldn't understand. Can you say that again?`); });
@@ -28,7 +31,7 @@ expressApp.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
 });
 
-expressApp.post('/fulfilment', app);
+expressApp.post('/fulfillment', app);
 expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
 const port = process.env.PORT ? process.env.PORT : 3000;
 
