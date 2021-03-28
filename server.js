@@ -1,9 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { dialogflow, actionssdk, } = require('actions-on-google');
+const { conversation } = require('@assistant/conversation');
 
-const app = dialogflow({ debug: true });
+
+const app = conversation({ debug: true });
+
+app.handle('greeting', (conv) => {
+  console.log('greeting called');
+  conv.add('simple greeting');
+});
+
+app.handler('unavailable_options', (conv) => {
+  conv.add(`I couldn't understand. Can you say that again?`);
+});
+
+
+/*
+
 
 const optionsNeedA = new Set();
 optionsNeedA.add('horse').add('phone');
@@ -22,7 +36,8 @@ app.intent('Welcome', (conv) => { console.log('welcome'); conv.ask('Welcome!'); 
 app.intent('greeting', (conv) => { console.log('greetng called'); conv.ask('geeting!'); });
 
 
-app.fallback((conv) => { conv.ask(`I couldn't understand. Can you say that again?`); });
+
+*/
 
 const expressApp = express().use(bodyParser.json());
 expressApp.use(express.static("public"));
@@ -31,7 +46,7 @@ expressApp.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
 });
 
-expressApp.post('/fulfillment', app);
+expressApp.post('/', app);
 expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
 const port = process.env.PORT ? process.env.PORT : 3000;
 
