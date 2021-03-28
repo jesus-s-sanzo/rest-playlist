@@ -6,19 +6,33 @@ const { conversation } = require('@assistant/conversation');
 
 const app = conversation({ debug: true });
 
-app.handle('greeting', (conv) => {
+app.handle('greeting', conv => {
   console.log('greeting called');
-  conv.add('simple greeting');
+  let message = 'A wondrous greeting, adventurer! Welcome back to the mythical land of Gryffinberg!';
+  if (!conv.user.lastSeenTime) {
+    message = 'Welcome to the mythical land of  Gryffinberg! Based on your clothes, you are not from around these lands. It looks like you\'re on your way to an epic journey.';
+  }
+  conv.add(message);
 });
 
 app.handler('unavailable_options', (conv) => {
   conv.add(`I couldn't understand. Can you say that again?`);
 });
 
+const expressApp = express().use(bodyParser.json());
+expressApp.use(express.static("public"));
+// serve the index.html file when visiting the homepage
+expressApp.get("/", function (request, response) {  response.sendFile(__dirname + "/index.html");});
+expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
 
+expressApp.post('/', app);
+const port = process.env.PORT ? process.env.PORT : 3000;
+
+module.exports = { 'expressApp': expressApp }
+
+// start the server on the given port
+expressApp.listen(port, () => console.log(`server listening on port ${port}`));
 /*
-
-
 const optionsNeedA = new Set();
 optionsNeedA.add('horse').add('phone');
 
@@ -34,23 +48,4 @@ app.intent('unavailable_options', conv => { conv.ask('That wont help'); });
 
 app.intent('Welcome', (conv) => { console.log('welcome'); conv.ask('Welcome!'); });
 app.intent('greeting', (conv) => { console.log('greetng called'); conv.ask('geeting!'); });
-
-
-
 */
-
-const expressApp = express().use(bodyParser.json());
-expressApp.use(express.static("public"));
-// serve the index.html file when visiting the homepage
-expressApp.get("/", function (request, response) {
-  response.sendFile(__dirname + "/index.html");
-});
-
-expressApp.post('/', app);
-expressApp.get('/health', async function (req, res) { res.send({ "status": "working", "localtime": new Date() }); });
-const port = process.env.PORT ? process.env.PORT : 3000;
-
-module.exports = { 'expressApp': expressApp }
-
-// start the server on the given port
-expressApp.listen(port, () => console.log(`server listening on port ${port}`));

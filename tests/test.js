@@ -51,7 +51,7 @@ const requestJson = {
 };
 
 function test1(done) {
-    request.post('/fulfillment').send(requestJson).expect(200).end(function (err, result) {
+    request.post('/').send(requestJson).expect(200).end(function (err, result) {
         let body = result.body;
         done(err);
     });
