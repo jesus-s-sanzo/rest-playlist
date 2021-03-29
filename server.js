@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const { conversation } = require('@assistant/conversation');
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 
 const app = conversation({ debug: true });
 
@@ -15,9 +16,6 @@ app.handle('greeting', conv => {
   conv.add(message);
 });
 
-app.handler('unavailable_options', (conv) => {
-  conv.add(`I couldn't understand. Can you say that again?`);
-});
 
 const expressApp = express().use(bodyParser.json());
 expressApp.use(express.static("public"));
