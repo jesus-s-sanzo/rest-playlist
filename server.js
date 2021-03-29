@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { conversation } = require('@assistant/conversation');
-const functions = require('firebase-functions');
 
 const app = conversation({ debug: true });
 
@@ -29,6 +28,3 @@ module.exports = { 'expressApp': expressApp }
 
 // start the server on the given port
 expressApp.listen(port, () => console.log(`server listening on port ${port}`));
-
-module.exports.ActionsOnGoogleFulfillment = functions.https.onRequest(app);
-
