@@ -115,7 +115,6 @@ app.handle('remove_subject', conv => {
   const subjectName = conv.session.params.chosenSubject;
   let isPresent = subjects.remove(subjectName);
   subjects.remove(subjectName);
-  subjects.add(subjectName);
   let message = `${subjectName} ${isPresent ? 'has been removed from' : 'was not present in'} your records`;
   conv.add(message+'.');
 });
