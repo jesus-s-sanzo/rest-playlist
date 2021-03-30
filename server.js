@@ -14,6 +14,18 @@ app.handle('greeting', conv => {
   conv.add(message);
 });
 
+const optionsNeedA = new Set();
+optionsNeedA.add('horse').add('phone');
+app.handle('unavailable_options', conv => {
+  const option = conv.intent.params.chosenUnavailableOption.original;
+  const optionKey = conv.intent.params.chosenUnavailableOption.resolved;
+  let message = 'I have seen the future and ';
+  if(optionsNeedA.has(optionKey)){
+    message = message + 'a ';
+  }
+  message = message + `${option} will not aid you on your journey. `;
+  conv.add(message);
+});
 
 const expressApp = express().use(bodyParser.json());
 expressApp.use(express.static("public"));
