@@ -24,7 +24,7 @@ toString = () => {
     let result = 'Your subjects are: ';
     let lines = subjectList.map(subject => {
         let daysAgo = daysDiff(subject.date, now);
-        return `${subject.name}, studied ${daysAgo == 0 ? 'today' : daysAgo == 1 ? 'yesterday' : daysAgo + ' day ago'}`;
+        return `${subject.name}, studied ${daysAgo == 0 ? 'today' : daysAgo == 1 ? 'yesterday' : daysAgo + ' days ago'}`;
     })
     result += lines.slice(0, -1).join(', ') + ', and ' + lines.slice(-1);
     return result;

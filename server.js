@@ -12,7 +12,7 @@ app.handle('greeting', conv => {
   if (!conv.user.lastSeenTime) {
     message = 'Welcome to the mythical land of  Gryffinberg! Based on your clothes, you are not from around these lands. It looks like you\'re on your way to an epic journey.';
   }
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 const optionsNeedA = new Set();
@@ -23,7 +23,7 @@ app.handle('unavailable_options', conv => {
   const option = conv.intent.params.chosenUnavailableOption.original;
   const optionKey = conv.intent.params.chosenUnavailableOption.resolved;
   let message = `I have seen the future and ${optionsNeedA.has(optionKey) ? 'a ' : ''}${option} will not aid you on your journey.`;
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 const subjects = require('./subjects');
@@ -87,12 +87,12 @@ subjects.init(initialList);
 
 app.handle('list_subjects', conv => {
   let message = subjects.toString();
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 app.handle('suggestion', conv => {
   let message = subjects.suggest();
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 app.handle('mark_studied', conv => {
@@ -100,7 +100,7 @@ app.handle('mark_studied', conv => {
   let isPresent =subjects.remove(subjectName);
   subjects.add(subjectName);
   let message = `${subjectName} has been ${isPresent?'added and ':''}marked as studied in your records`;
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 app.handle('new_subject', conv => {
@@ -108,7 +108,7 @@ app.handle('new_subject', conv => {
   let isPresent =subjects.remove(subjectName);
   subjects.add(subjectName);
   let message = `${subjectName} ${isPresent?'was already in your recoreds, it has been':'has been added to your records and'} marked as studied`;
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 app.handle('remove_subject', conv => {
@@ -117,7 +117,7 @@ app.handle('remove_subject', conv => {
   subjects.remove(subjectName);
   subjects.add(subjectName);
   let message = `${subjectName} ${isPresent ? 'has been removed from' : 'was not present in'} your records`;
-  conv.add(message);
+  conv.add(message+'.');
 });
 
 const expressApp = express().use(bodyParser.json());
