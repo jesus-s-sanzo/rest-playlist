@@ -21,18 +21,34 @@ app.handle('unavailable_options', conv => {
   console.log('unavailable_options called');
   const option = conv.intent.params.chosenUnavailableOption.original;
   const optionKey = conv.intent.params.chosenUnavailableOption.resolved;
-  let message = `I have seen the future and ${optionsNeedA.has(optionKey)?'a ':''}${option} will not aid you on your journey.`;
+  let message = `I have seen the future and ${optionsNeedA.has(optionKey) ? 'a ' : ''}${option} will not aid you on your journey.`;
   conv.add(message);
 });
 
 app.handle('list_subjects', conv => {
-  message ='This is the webhook list';
+  message = 'This is the webhook list.';
   conv.add(message);
 });
 
 app.handle('suggestion', conv => {
-  message ='This is the webhook suggestion';
- conv.add(message);
+  message = 'This is the webhook suggestion.';
+  conv.add(message);
+});
+
+app.handle('mark_studied', conv => {
+  const subject = conv.session.params.chosenSubject
+  message = `${subject} has been marked as studied in the webhook`
+  conv.add(message);
+});
+app.handle('new_subject', conv => {
+  const subject = conv.session.params.chosenSubject
+  message = `${subject} has been added in the webhook`
+  conv.add(message);
+});
+app.handle('remove_subject', conv => {
+  const subject = conv.session.params.chosenSubject
+  message = `${subject} has been removed in the webhook`
+  conv.add(message);
 });
 
 const expressApp = express().use(bodyParser.json());
