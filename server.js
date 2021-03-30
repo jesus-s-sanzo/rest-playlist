@@ -36,18 +36,18 @@ app.handle('suggestion', conv => {
 });
 
 app.handle('mark_studied', conv => {
-  const subject = conv.session.params.chosenSubject
-  message = `${subject} has been marked as studied in the webhook`
+  const subject = conv.session.params.chosenSubject;
+  message = `${subject} has been marked as studied in the webhook`;
   conv.add(message);
 });
 app.handle('new_subject', conv => {
-  const subject = conv.session.params.chosenSubject
-  message = `${subject} has been added in the webhook`
+  const subject = conv.session.params.chosenSubject;
+  message = `${subject} has been added in the webhook`;
   conv.add(message);
 });
 app.handle('remove_subject', conv => {
-  const subject = conv.session.params.chosenSubject
-  message = `${subject} has been removed in the webhook`
+  const subject = conv.session.params.chosenSubject;
+  message = `${subject} has been removed in the webhook`;
   conv.add(message);
 });
 
