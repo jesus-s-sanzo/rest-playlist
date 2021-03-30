@@ -30,8 +30,8 @@ app.handle('list_subjects', conv => {
   conv.add(message);
 });
 
-app.handle('sugestion', conv => {
-  message ='This is the webhook subjection';
+app.handle('suggestion', conv => {
+  message ='This is the webhook suggestion';
  conv.add(message);
 });
 
