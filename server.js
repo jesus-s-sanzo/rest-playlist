@@ -25,6 +25,16 @@ app.handle('unavailable_options', conv => {
   conv.add(message);
 });
 
+app.handle('list_subjects', conv => {
+  message ='This is the webhook list';
+  conv.add(message);
+});
+
+app.handle('sugestion', conv => {
+  message ='This is the webhook subjection';
+ conv.add(message);
+});
+
 const expressApp = express().use(bodyParser.json());
 expressApp.use(express.static("public"));
 // serve the index.html file when visiting the homepage
