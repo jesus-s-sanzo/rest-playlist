@@ -128,7 +128,7 @@ function testMarkStudied(done) {
     request.post('/').send(markStudiedRequest).expect(200).end(function (err, result) {
         assert(result.body.prompt && result.body.prompt.firstSimple && result.body.prompt.firstSimple.speech, "result.body.prompt.firstSimple.speech not present");
         let speech = result.body.prompt.firstSimple.speech;
-        assert.equal('Bohemian airs has been marked as studied in your records', speech);
+        assert.equal('Bohemian airs has been marked as studied in your records.', speech);
         done(err);
     });
 }
@@ -147,7 +147,7 @@ function testRemoveSubject(done) {
     request.post('/').send(removeSubjectRequest).expect(200).end(function (err, result) {
         assert(result.body.prompt && result.body.prompt.firstSimple && result.body.prompt.firstSimple.speech, "result.body.prompt.firstSimple.speech not present");
         let speech = result.body.prompt.firstSimple.speech;
-        assert.equal('Bohemian airs has been removed from your records', speech);
+        assert.equal('Bohemian airs has been removed from your records.', speech);
         done(err);
     });
 }
@@ -166,7 +166,7 @@ function testNewSubject(done) {
     request.post('/').send(newSubjectRequest).expect(200).end(function (err, result) {
         assert(result.body.prompt && result.body.prompt.firstSimple && result.body.prompt.firstSimple.speech, "result.body.prompt.firstSimple.speech not present");
         let speech = result.body.prompt.firstSimple.speech;
-        assert.equal('Bohemian airs was already in your recoreds, it has been marked as studied', speech);
+        assert.equal('Bohemian airs has been added to your records and marked as studied.', speech);
         done(err);
     });
 }
@@ -179,7 +179,7 @@ function testHealth(done) {
 }
 
 function runTests() {
-    // it('Test health', testHealth);
+    it('Test health', testHealth);
     it('test Greeting', testGreeting);
     it('test UnabailableOpcion', testUnabailableOpcion);
     it('test ListSubjects', testListSubjects);

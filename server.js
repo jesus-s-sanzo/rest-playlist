@@ -2,9 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { conversation } = require('@assistant/conversation');
-const { sortJsonObject } = require('@assistant/conversation/dist/common');
 
-const app = conversation({ debug: true });
+const app = conversation({ debug: false });
 
 app.handle('greeting', conv => {
   console.log('greeting called');
@@ -12,7 +11,7 @@ app.handle('greeting', conv => {
   if (!conv.user.lastSeenTime) {
     message = 'Welcome to the mythical land of  Gryffinberg! Based on your clothes, you are not from around these lands. It looks like you\'re on your way to an epic journey.';
   }
-  conv.add(message+'.');
+  conv.add(message);
 });
 
 const optionsNeedA = new Set();
@@ -23,59 +22,11 @@ app.handle('unavailable_options', conv => {
   const option = conv.intent.params.chosenUnavailableOption.original;
   const optionKey = conv.intent.params.chosenUnavailableOption.resolved;
   let message = `I have seen the future and ${optionsNeedA.has(optionKey) ? 'a ' : ''}${option} will not aid you on your journey.`;
-  conv.add(message+'.');
+  conv.add(message);
 });
 
 const subjects = require('./subjects');
-/*
-let subjects = {
-  subjectList: [],
-  add: (subjectName) => {
-    subject = { name: subjectName, date: today };
-    this.subjectList.push(subjectName);
-    this.sortByDate();
-  },
 
-  get: (subjectName) => {
-    subject = this.subjectList.find(subjectIterator => subjectIterator.name.includes(subjectName));
-    return subject;
-  },
-
-  list: () => this.subjectList,
-  remove: (subjectName) => {
-    prevSize = this.subjectList.length();
-    this.subjectList = this.subjectList.filter(item => item.name !== subjectName);
-    return prevSize - this.subjectList.length() > 0;
-  },
-
-  toString: () => {
-    let now = this.today();
-    let result = 'Your subjects are: ' + this.subjectList.map(subject => {
-      let daysAgo = daysDiff(subject.date, now);
-      return `${subject.name}, studied ${daysAgo ? 'today' : daysAgo + ' days ago'}`;
-    }).join(', ');
-    return result;
-  },
-
-  suggest: () => {
-    let subject = this.subjectList[ 0 ];
-    let suggestion = subject ? `You should study ${subject.name},last studied ${daysAgo ? 'today' : daysAgo + ' days ago'}`
-      : 'you have no subjects registered, try adding some to track and suggest';
-    return suggestion;
-  },
-  sortByDate: function () {
-    this.subjectList.sort((a, b) => (a.date.getTime() > b.date.getTime()) ? 1 : -1)
-  },
-
-  init: (initialList) => {
-    this.subjectList = initialList;
-    this.sortByDate();
-  },
-
-  today: () => new Date((new Date()).toDateString()),
-  daysDiff: function (date1, date2) { return (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24) }
-}
-*/
 let initialList =
   [
     { name: 'Bachs sonata 1', date: new Date('2021-03-29') },
