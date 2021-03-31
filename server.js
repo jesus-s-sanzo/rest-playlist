@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const { conversation } = require('@assistant/conversation');
-
 const app = conversation({ debug: false });
 
 app.handle('greeting', conv => {
@@ -65,7 +63,6 @@ app.handle('new_subject', conv => {
 app.handle('remove_subject', conv => {
   const subjectName = conv.session.params.chosenSubject;
   let isPresent = subjects.remove(subjectName);
-  subjects.remove(subjectName);
   let message = `${subjectName} ${isPresent ? 'has been removed from' : 'was not present in'} your records`;
   conv.add(message+'.');
 });
